@@ -1,46 +1,17 @@
-let values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'] //13 different cards per suit
-let suits = ['Clubs', 'Diamonds', 'Hearts', 'Spades'] //4 suits
+let values = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'] //13 different cards per suit
+let suits = ['clubs', 'diams', 'hearts', 'spades'] //4 suits
 let deck = []
+// let randomNum = Math.floor((Math.random()*52)+1) //for selecting random card
+//console.log(randomNum)
+let cardArea = document.getElementById('cardArea')
 
-function createDeck() //for combining values and suits into 52 cards objects, pushes them to deck array
-{
+
     for (s = 0; s < suits.length; s++)
     {
+        let suit = suits[s][0].toUpperCase()
+        let suitColor = (suit == 'S' || suit == 'C') ? 'black' : 'red'
         for(v = 0 ; v < values.length; v++)
         {
-            let weight = parseInt(values[v])
-            if (values[v] == 'J' || values[v] == 'K' || values[v] == 'Q')
-                weight = 10
-            if (values[v] == 'A')
-                weight = 11
-            let card = {Value: values[v], Suit: suits[s], Weight: weight}
-            deck.push(card)
+            cardArea.innerHTML += "<span style='color:" + suitColor + "'>&" + suits[s] + ";" + values[v] + "</span>"
         }
-    }
-}
-
-createDeck() //invoked to fill deck with 52 cards
-
-console.log(deck)
-
-
-console.log(deck[Math.floor((Math.random()*52))]) //selects random card from deck array, indices 0-51
-
-// let output = document.getElementById('output')
-// output.innerHTML = deck[Math.floor((Math.random()*52))]
-
-
-let dealerHand = document.getElementById('dealerHand')
-let playerHand = document.getElementById('playerHand')
-
-function dealACard() {  //dealing random card to dealer and player
-    let cardArea = document.getElementById('cardArea')
-    // cardArea.innerHTML = deck[Math.floor((Math.random()*52))]
-    dealerHand.innerHTML = deck[Math.floor((Math.random()*52))]
-    playerHand.innerHTML = deck[Math.floor((Math.random()*52))]
-
-    console.log(playerHand.innerHTML)
-}
-
-dealACard()
-
+    }   
