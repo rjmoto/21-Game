@@ -30,8 +30,11 @@ console.log(deck[Math.floor((Math.random()*52))]) //selects random card from dec
 // output.innerHTML = deck[Math.floor((Math.random()*52))]
 
 function DealACard() {
-    let output = document.getElementById('output')
-    output.innerHTML = deck[Math.floor((Math.random()*52))]
+    let cardArea = document.getElementById('cardArea')
+    cardarea.innerHTML = deck[Math.floor((Math.random()*52))]
 }
 
 DealACard()
+
+let dealerHand = document.getElementById('dealerHand')
+let playerHand = document.getElementById('playerHand')
