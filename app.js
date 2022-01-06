@@ -23,4 +23,15 @@ createDeck() //invoked to fill deck with 52 cards
 
 console.log(deck)
 
+
 console.log(deck[Math.floor((Math.random()*52))]) //selects random card from deck array, indices 0-51
+
+// let output = document.getElementById('output')
+// output.innerHTML = deck[Math.floor((Math.random()*52))]
+
+function DealACard() {
+    let output = document.getElementById('output')
+    output.innerHTML = deck[Math.floor((Math.random()*52))]
+}
+
+DealACard()
