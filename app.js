@@ -6,12 +6,12 @@ let deck = []
 let cardArea = document.getElementById('cardArea')
 
 
-    for (s = 0; s < suits.length; s++)
+    for (s = 0; s < suits.length; s++) //loop puts together suits, values, color
     {
-        let suit = suits[s][0].toUpperCase()
+        let suit = suits[s][0].toUpperCase() //incase case sensitive
         let suitColor = (suit == 'S' || suit == 'C') ? 'black' : 'red'
         for(v = 0 ; v < values.length; v++)
         {
             cardArea.innerHTML += "<span style='color:" + suitColor + "'>&" + suits[s] + ";" + values[v] + "</span>"
-        }
+        } //visualize full deck in html
     }   
