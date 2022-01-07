@@ -68,8 +68,12 @@ function dealNew() { //to initally deal 2 cards each
 }
 //need to figure out how to hide first dealer card though
 
-function cardDisplay(cC) { //for outputting the generated card value - (cardCount)
-    return "<span style='color:" + deck[cardCount].suitColor + "'>&" + deck[cardCount].symbol + ";" + deck[cardCount].weight + "</span>"
+function cardDisplay(cC) { //for outputting the generated card values and design - (cardCount)
+    let cardPos = (d > 0) ? d * 60 + 100 : 100; //relative card positioning
+    return '<div class="card ' + deck[s].symbol + '" style="left:' + cardPos + 'px;">  <div class="cardTop suit">' + deck[v].value + '<br></div>  <div class="cardCenter suit"></div>  <div class="cardBottom suit">' + deck[v].value +
+      '<br></div> </div>';
+    
+    // return "<span style='color:" + deck[cardCount].suitColor + "'>&" + deck[cardCount].symbol + ";" + deck[cardCount].weight + "</span>"
 }
 
 function start() {
