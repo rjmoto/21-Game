@@ -51,7 +51,7 @@ function shuffle(arr) { //randomly mixes up cards into different indices
 }
 // console.log(shuffle(deck))
 
-
+//need to figure out how to hide first dealer card though
 function dealNew() { //to initally deal 2 cards each
     playerCards = []
     dealerCards = []
@@ -59,21 +59,21 @@ function dealNew() { //to initally deal 2 cards each
     dealerHand.innerHTML = ''
     for(d = 0; d < 2; d++) {
         dealerCards.push(deck[cardCount])
-        dealerHand.innerHTML += cardDisplay(cardCount)
+        dealerHand.innerHTML += cardDisplay(cardCount, d)
+        if(d == 0) {
+            dealerHand.innerHTML += '<div id="hide" style="left: 100px;"></div>'
+        }
         cardCount++
         playerCards.push(deck[cardCount])
-        playerHand.innerHTML += cardDisplay(cardCount)
+        playerHand.innerHTML += cardDisplay(cardCount, d)
         cardCount++
     }
 }
 //need to figure out how to hide first dealer card though
 
-function cardDisplay(cC) { //for outputting the generated card values and design - (cardCount)
-    let cardPos = (d > 0) ? d * 60 + 100 : 100; //relative card positioning
-    return '<div class="card ' + deck[s].symbol + '" style="left:' + cardPos + 'px;">  <div class="cardTop suit">' + deck[v].value + '<br></div>  <div class="cardCenter suit"></div>  <div class="cardBottom suit">' + deck[v].value +
-      '<br></div> </div>';
-    
-    // return "<span style='color:" + deck[cardCount].suitColor + "'>&" + deck[cardCount].symbol + ";" + deck[cardCount].weight + "</span>"
+function cardDisplay(v, d) { //for outputting the generated card values and design - (cardCount)
+    let cardPos = (d > 0) ? d * 60 + 100 : 100; //card relative positioning, styling, values
+    return '<div class="card ' + deck[v].symbol + '" style="left:' + cardPos + 'px;"> <div class="cardTop suit">' + deck[v].value + '<br></div>  <div class="cardCenter suit"></div> <div class="cardBottom suit">' + deck[v].value + '<br></div> </div>'
 }
 
 function start() {
