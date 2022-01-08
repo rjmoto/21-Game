@@ -29,13 +29,20 @@
     <!-- <div class='card'>test</div> -->
     <div id='cardArea'></div>   
 
-    <button type='button'>HIT</button>
-    <button type='button'>STAY</button>
+
+
+    <div id="playerChoices">
+        <button id='dealButton' type='button' onclick="dealNew()">Deal</button>
+
+        <button id='hitButton' type='button' onclick='choice()'>HIT</button>
+
+        <button id='stayButton' type='button' onclick='choice()'>STAY</button>
+    </div>
 
     <br>
 
-    <input type="number">Bet Amount</input>
-    <div>Bank / Money remaining</div>
+    <input type="number" value="0" min="10">Bet Amount</input>
+    <div class="wallet">WALLET: $$ + <span id="money">remaining money here</span></div>
     
 </body>
 </html>
