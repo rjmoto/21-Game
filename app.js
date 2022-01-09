@@ -8,6 +8,7 @@ let cardArea = document.getElementById('cardArea')
 let playerHand = document.getElementById('playerHand')
 let dealerHand = document.getElementById('dealerHand')
 let wallet = 100
+let message = document.getElementById("message")
 
 
     for (s = 0; s < suits.length; s++) //loop puts together suits, values, color, card suit symbols
@@ -42,7 +43,7 @@ function start() {
 function dealNew() { //to initally deal 2 cards each
     playerCards = []
     dealerCards = []
-    playerHand.innerHTML = ''
+    playerHand.innerHTML = '' //clear hands for new deal
     dealerHand.innerHTML = ''
     // for(d = 0; d < 2; d++) {
     //     dealerCards.push(deck[cardCount])
@@ -55,6 +56,13 @@ function dealNew() { //to initally deal 2 cards each
     //     playerHand.innerHTML += cardDisplay(cardCount, d)
     //     cardCount++
     // }
+
+    let betAmount = document.getElementById('bet').value //pickup bet amount for new hand
+    wallet = wallet - betAmount //adjust wallet by bet amount
+    document.getElementById('money').innerHTML = wallet
+    document.getElementById('playerChoices').style.display = 'block' //show play option buttons
+    document.getElementById('bet').disabled = true //disable betting after cards dealt
+
    dealACard()
     console.log("pressed")
 }

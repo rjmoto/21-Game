@@ -11,6 +11,7 @@
 <body>
     <header>
         <h1>My Blackjack Game</h1>
+        <h3>Try to get 21 or beat the dealer's score without going over</h3>
     </header>
 
     <div id="start">
@@ -18,6 +19,9 @@
     </div>
 
     <div></div>
+
+    <div id="message">DISPLAY MESSAGES HERE</div>
+
 
     <div id='cardArea'>
         Dealer's Hand = <span id="dWeight"></span>
@@ -32,24 +36,26 @@
 
     <!-- <div class='card'>test</div> -->
     <!-- <div id='cardArea'></div>    -->
-
+    <!-- <div id="message">Display messages here</div> -->
 
     <!-- <div id='cardArea'> -->
-        <div id="playerChoices">
-            <button id='dealButton' type='button' onclick="dealNew()" class="btn">Deal</button>
+    
+            <div id="playerChoices">
+                <button id='dealButton' type='button' onclick="dealNew()" class="btn">Deal</button>
 
-            <button id='hitButton' type='button' onclick='choice("hit")' class="btn">HIT</button>
+                <button id='hitButton' type='button' onclick='choice("hit")' class="btn">HIT</button>
 
-            <button id='stayButton' type='button' onclick='choice("stay")' class="btn">STAY</button>
+                <button id='stayButton' type='button' onclick='choice("stay")' class="btn">STAY</button>
+            </div>
+        <!-- </div> -->
+        <!-- <br> -->
+
+        <div>
+            Bet Amount: $<input type="number" id="bet" value="10" min="10" max="100"></input>
         </div>
-    <!-- </div> -->
-    <br>
 
-    <div>
-        Bet Amount: $<input type="number" id="bet" value="10" min="10" max="100"></input>
-    </div>
-
-    <div class="wallet">WALLET: $$ + <span id="money">remaining money here</span></div>
+        <div class="wallet">WALLET: $<span id="money">100</span>
+        </div>
     
 </body>
 </html>
