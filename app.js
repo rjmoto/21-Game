@@ -8,6 +8,11 @@ let cardArea = document.getElementById('cardArea')
 let playerHand = document.getElementById('playerHand')
 let dealerHand = document.getElementById('dealerHand')
 
+function start() {
+    console.log("start function invoked")
+    shuffle(deck)
+    dealNew(deck)
+}
 
     for (s = 0; s < suits.length; s++) //loop puts together suits, values, color, card suit symbols
     {
@@ -41,12 +46,6 @@ function shuffle(arr) { //randomly mixes up cards into different indices
     return arr
 }
 
-function start() {
-    console.log("start function invoked")
-    shuffle(deck)
-    dealNew(deck)
-}
-
 function dealNew() { //to initally deal 2 cards each
     console.log('dealNew function invoked')
     playerCards = []
@@ -67,6 +66,10 @@ function dealNew() { //to initally deal 2 cards each
     // console.log("pressed")
 }
 
+
+
+
+
 function regularDeal() {
     console.log(deck, "regularDeal invoked")
 
@@ -82,25 +85,11 @@ function regularDeal() {
         cardCount++
 }
 
-function dealACard() {
-    console.log("dealACard function invoked")
-    let randomNum = Math.floor((Math.random()*52)+1) //for selecting random card
-    playerHand.innerHTML += "<span style='color:" + deck[cardCount].suitColor + "'>&" + deck[cardCount].symbol + ";" + deck[cardCount].weight + "</span>" //test to see random card, showing colored symbol and weight, occassionally get an error, probably because of deck[]random mashups? Not sure yet
-
-    dealerHand.innerHTML += "<span style='color:" + deck[cardCount].suitColor + "'>&" + deck[cardCount].symbol + ";" + deck[cardCount].weight + "</span>"
-}
-
 function cardDisplay(v, d) { //for outputting the generated card values and design - (cardCount)
     console.log("cardDisplay function invoked")
     let cardPos = (d > 0) ? d * 60 + 100 : 100; //card relative positioning, styling, values
     return '<div class="card ' + deck[v].symbol + '" style="left:' + cardPos + 'px;"> <div class="cardTop suit">' + deck[v].value + '<br></div>  <div class="cardCenter suit"></div> <div class="cardBottom suit">' + deck[v].value + '<br></div> </div>'
 }
-
-
-
-playersHandTotal = document.getElementById('playersHandTotal')
-dealersHandTotal = document.getElementById('dealersHandTotal')
-
 
 function choice(hitStay) {
     console.log("player pressed hit or stay")
@@ -109,6 +98,14 @@ function choice(hitStay) {
     } if (hitStay == 'stay'){
         endTurn()
     }
+}
+
+function dealACard() {
+    console.log("dealACard function invoked")
+    let randomNum = Math.floor((Math.random()*52)+1) //for selecting random card
+    playerHand.innerHTML += "<span style='color:" + deck[cardCount].suitColor + "'>&" + deck[cardCount].symbol + ";" + deck[cardCount].weight + "</span>" //test to see random card, showing colored symbol and weight, occassionally get an error, probably because of deck[]random mashups? Not sure yet
+
+    dealerHand.innerHTML += "<span style='color:" + deck[cardCount].suitColor + "'>&" + deck[cardCount].symbol + ";" + deck[cardCount].weight + "</span>"
 }
 
 function anotherCard() {
@@ -127,6 +124,19 @@ function endTurn() {
 function contDeal() { //to continue dealing after game/hand has already started
     console.log('continue dealing cards')
 }
+
+
+
+
+
+playersHandTotal = document.getElementById('playersHandTotal')
+dealersHandTotal = document.getElementById('dealersHandTotal')
+
+
+
+
+
+
 
 //continue dealing after game start
 //win/lose/push
