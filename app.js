@@ -87,7 +87,8 @@ function dealACard() {
         playerHand.innerHTML += cardDisplay(cardCount, d)
         cardCount++
     }
-
+    pWeight.innerHTML = checkWeight(playerCards) //see player total
+    
 }
 
 
@@ -164,20 +165,17 @@ function endTurn() {
         dealerHand.innerHTML += cardDisplay(cardCount, (dealerCards.length -1))
         cardCount++
         dealerTotal = checkWeight(dealerCards)
+        dWeight.innerHTML = dealerTotal
     }
+    let playerTotal = checkWeight(playerCards) 
+    if (playerTotal == 21 && playerCards.length == 2) { //checking blackjack
+        message.innerHTML = "BLACKJACK!"
+    }
+
 }
 
 //continue dealing after game start
 //win/lose/push
-
-
-function dealACard() {
-    console.log("dealACard function invoked")
-    let randomNum = Math.floor((Math.random()*52)+1) //for selecting random card
-    playerHand.innerHTML += "<span style='color:" + deck[cardCount].suitColor + "'>&" + deck[cardCount].symbol + ";" + deck[cardCount].weight + "</span>" //test to see random card, showing colored symbol and weight, occassionally get an error, probably because of deck[]random mashups? Not sure yet
-
-    dealerHand.innerHTML += "<span style='color:" + deck[cardCount].suitColor + "'>&" + deck[cardCount].symbol + ";" + deck[cardCount].weight + "</span>"
-}
 
 
 
@@ -185,28 +183,12 @@ function contDeal() { //to continue dealing after game/hand has already started
 
 }
 
-// function regularDeal() {
-//     console.log(deck, "regularDeal invoked")
-
-//     for(d = 0; d < 2; d++) {
-//         dealerCards.push(deck[cardCount])
-//         dealerHand.innerHTML += cardDisplay(cardCount, d)
-//         if(d == 0) {
-//             dealerHand.innerHTML += '<div id="hide" style="left: 100px;"></div>'
-//         }
-//         cardCount++
-//         playerCards.push(deck[cardCount])
-//         playerHand.innerHTML += cardDisplay(cardCount, d)
-//         cardCount++
-// }
-
 
 
 //continue dealing after game start
 //win/lose/push
 //bets
 //wallet
-//Aces
 //result message to player
 //show player & dealer's scores 
 
