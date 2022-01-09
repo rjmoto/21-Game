@@ -7,6 +7,7 @@ let dealerCards = []
 let cardArea = document.getElementById('cardArea')
 let playerHand = document.getElementById('playerHand')
 let dealerHand = document.getElementById('dealerHand')
+let wallet = 100
 
 
     for (s = 0; s < suits.length; s++) //loop puts together suits, values, color, card suit symbols
@@ -33,6 +34,9 @@ console.log(deck)
 function start() {
     shuffle(deck)
     dealNew(deck)
+    document.getElementById('start').style.display = 'none' //hide start button after game start
+    document.getElementById('money').innerHTML = wallet
+
 }
 
 function dealNew() { //to initally deal 2 cards each

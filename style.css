@@ -27,6 +27,17 @@ h1 {
     border-radius: 12px;
     position: absolute;
 }
+/* player buttons */
+#dealButton, #playerChoices {
+    display: none;
+}
+
+/* button styling */
+.btn {
+    border-radius: 7px;
+    padding: 10px 25px;
+}
+
 .clubs, .spades{
     color: black;
 }
