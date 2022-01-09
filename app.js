@@ -7,6 +7,8 @@ let dealerCards = []
 let cardArea = document.getElementById('cardArea')
 let playerHand = document.getElementById('playerHand')
 let dealerHand = document.getElementById('dealerHand')
+let pWeight = document.getElementById('pWeight') //display total of player's hand
+let dWeight = document.getElementById('dWeight') //display total of dealer's hand
 let wallet = 100
 let message = document.getElementById("message")
 
@@ -104,26 +106,47 @@ function cardDisplay(v, d) { //for outputting the generated card values and desi
     return '<div class="card ' + deck[v].symbol + '" style="left:' + cardPos + 'px;"> <div class="cardTop suit">' + deck[v].value + '<br></div>  <div class="cardCenter suit"></div> <div class="cardBottom suit">' + deck[v].value + '<br></div> </div>'
 }
 
-// function start() {
-//     shuffle(deck)
-//     dealNew(deck)
-// }
-
-
-//continue dealing after game start
-//win/lose/push
-//bets
-//wallet
-//Aces
-
 function choice(hitStay) {
     console.log("pressed")
-    if (hitStay == 'hit') {
+    if (hitStay == 'hit') { //deal another card to player
         anotherCard()
-    } if (hitStay == 'stay'){
+    } if (hitStay == 'stay'){ //player done adding cards, finish dealer hand
         endTurn()
     }
 }
+
+function anotherCard() {
+    console.log("deal player another card")
+    playerCards.push(deck[cardCount])
+    console.log(cardCount)
+    playerHand.innerHTML += cardDisplay(cardCount, (playerCards.length - 1))
+    cardCount++
+    let resultWeight = checkWeight(playerCards)
+    pWeight.innerHTML = resultWeight
+
+}
+
+function checkWeight(arr) { //checks for aces, determines their weight
+    let resultWeight = 0
+    let ace = false
+    for(a = 0 ; a < arr.length; a++) {
+        if (arr[a].value == 'A' && !ace) {
+            ace = true
+            resultWeight = resultWeight + 10
+        }
+        resultWeight = resultWeight + arr[a].weight
+    }
+    if (ace && resultWeight > 21) {
+        resultWeight = resultWeight - 10
+    }
+    return resultWeight
+}
+
+//continue dealing after game start
+//win/lose/push
+//Aces
+
+
 
 function dealACard() {
     console.log("dealACard function invoked")
@@ -134,13 +157,7 @@ function dealACard() {
 }
 
 
-function anotherCard() {
-    console.log("deal player another card")
-    playerCards.push(deck[cardCount])
-    console.log(cardCount)
-    playerHand.innerHTML += cardDisplay(cardCount, (playerCards.length - 1))
-    cardCount++
-}
+
 
 function endTurn() {
     console.log('player holds - dealer go')
@@ -167,15 +184,6 @@ function contDeal() { //to continue dealing after game/hand has already started
 
 
 
-playersHandTotal = document.getElementById('playersHandTotal')
-dealersHandTotal = document.getElementById('dealersHandTotal')
-
-
-
-
-
-
-
 //continue dealing after game start
 //win/lose/push
 //bets
@@ -184,26 +192,3 @@ dealersHandTotal = document.getElementById('dealersHandTotal')
 //result message to player
 //show player & dealer's scores 
 
-
-// my screw up section back-up:
-
-
-// function dealNew() { //to initally deal 2 cards each
-//     playerCards = []
-//     dealerCards = []
-//     playerHand.innerHTML = ''
-//     dealerHand.innerHTML = ''
-//     for(d = 0; d < 2; d++) {
-//         dealerCards.push(deck[cardCount])
-//         dealerHand.innerHTML += cardDisplay(cardCount, d)
-//         if(d == 0) {
-//             dealerHand.innerHTML += '<div id="hide" style="left: 100px;"></div>'
-//         }
-//         cardCount++
-//         playerCards.push(deck[cardCount])
-//         playerHand.innerHTML += cardDisplay(cardCount, d)
-//         cardCount++
-//     }
-//     console.log("pressed")
-// }
-//need to figure out how to hide first dealer card though
