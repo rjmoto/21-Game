@@ -30,17 +30,8 @@ let dealerHand = document.getElementById('dealerHand')
     }   
 console.log(deck)
 
-
-function dealACard() {
-    let randomNum = Math.floor((Math.random()*52)+1) //for selecting random card
-    playerHand.innerHTML += "<span style='color:" + deck[cardCount].suitColor + "'>&" + deck[cardCount].symbol + ";" + deck[cardCount].weight + "</span>" //test to see random card, showing colored symbol and weight, occassionally get an error, probably because of deck[]random mashups? Not sure yet
-
-    dealerHand.innerHTML += "<span style='color:" + deck[cardCount].suitColor + "'>&" + deck[cardCount].symbol + ";" + deck[cardCount].weight + "</span>"
-}
-
-
-
 function shuffle(arr) { //randomly mixes up cards into different indices
+    console.log("shuffle function invoked")
     for(i = arr.length -1; i > 0; i--) { //loops through array back to front
         let j = Math.floor(Math.random() * (1 + i))
         let temp = arr[i] //the ol' switcheraoo
@@ -49,10 +40,15 @@ function shuffle(arr) { //randomly mixes up cards into different indices
     }
     return arr
 }
-// console.log(shuffle(deck))
 
-//need to figure out how to hide first dealer card though
+function start() {
+    console.log("start function invoked")
+    shuffle(deck)
+    dealNew(deck)
+}
+
 function dealNew() { //to initally deal 2 cards each
+    console.log('dealNew function invoked')
     playerCards = []
     dealerCards = []
     playerHand.innerHTML = ''
@@ -68,28 +64,46 @@ function dealNew() { //to initally deal 2 cards each
         playerHand.innerHTML += cardDisplay(cardCount, d)
         cardCount++
     }
-    console.log("pressed")
+    // console.log("pressed")
 }
-//need to figure out how to hide first dealer card though
+
+function regularDeal() {
+    console.log(deck, "regularDeal invoked")
+
+    for(d = 0; d < 2; d++) {
+        dealerCards.push(deck[cardCount])
+        dealerHand.innerHTML += cardDisplay(cardCount, d)
+        if(d == 0) {
+            dealerHand.innerHTML += '<div id="hide" style="left: 100px;"></div>'
+        }
+        cardCount++
+        playerCards.push(deck[cardCount])
+        playerHand.innerHTML += cardDisplay(cardCount, d)
+        cardCount++
+}
+
+function dealACard() {
+    console.log("dealACard function invoked")
+    let randomNum = Math.floor((Math.random()*52)+1) //for selecting random card
+    playerHand.innerHTML += "<span style='color:" + deck[cardCount].suitColor + "'>&" + deck[cardCount].symbol + ";" + deck[cardCount].weight + "</span>" //test to see random card, showing colored symbol and weight, occassionally get an error, probably because of deck[]random mashups? Not sure yet
+
+    dealerHand.innerHTML += "<span style='color:" + deck[cardCount].suitColor + "'>&" + deck[cardCount].symbol + ";" + deck[cardCount].weight + "</span>"
+}
 
 function cardDisplay(v, d) { //for outputting the generated card values and design - (cardCount)
+    console.log("cardDisplay function invoked")
     let cardPos = (d > 0) ? d * 60 + 100 : 100; //card relative positioning, styling, values
     return '<div class="card ' + deck[v].symbol + '" style="left:' + cardPos + 'px;"> <div class="cardTop suit">' + deck[v].value + '<br></div>  <div class="cardCenter suit"></div> <div class="cardBottom suit">' + deck[v].value + '<br></div> </div>'
 }
 
-function start() {
-    shuffle(deck)
-    dealNew(deck)
-}
 
-//continue dealing after game start
-//win/lose/push
-//bets
-//wallet
-//Aces
+
+playersHandTotal = document.getElementById('playersHandTotal')
+dealersHandTotal = document.getElementById('dealersHandTotal')
+
 
 function choice(hitStay) {
-    console.log("pressed")
+    console.log("player pressed hit or stay")
     if (hitStay == 'hit') {
         anotherCard()
     } if (hitStay == 'stay'){
@@ -99,6 +113,11 @@ function choice(hitStay) {
 
 function anotherCard() {
     console.log("deal player another card")
+    playerCards.push(deck[cardCount])
+    console.log(cardCount)
+    playerHand.innerHTML += cardDisplay(cardCount, (playerCards.length - 1))
+    cardCount++
+
 }
 
 function endTurn() {
@@ -106,6 +125,13 @@ function endTurn() {
 }
 
 function contDeal() { //to continue dealing after game/hand has already started
-
+    console.log('continue dealing cards')
 }
 
+//continue dealing after game start
+//win/lose/push
+//bets
+//wallet
+//Aces
+//result message to player
+//show player & dealer's scores 
