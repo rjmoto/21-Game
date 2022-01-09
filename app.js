@@ -43,7 +43,7 @@ function dealACard() {
 function shuffle(arr) { //randomly mixes up cards into different indices
     for(i = arr.length -1; i > 0; i--) { //loops through array back to front
         let j = Math.floor(Math.random() * (1 + i))
-        let temp = arr[i]
+        let temp = arr[i] //the ol' switcheraoo
         arr[i] = arr[j]
         arr[j] = temp
     }
@@ -68,6 +68,7 @@ function dealNew() { //to initally deal 2 cards each
         playerHand.innerHTML += cardDisplay(cardCount, d)
         cardCount++
     }
+    console.log("pressed")
 }
 //need to figure out how to hide first dealer card though
 
@@ -79,5 +80,32 @@ function cardDisplay(v, d) { //for outputting the generated card values and desi
 function start() {
     shuffle(deck)
     dealNew(deck)
+}
+
+//continue dealing after game start
+//win/lose/push
+//bets
+//wallet
+//Aces
+
+function choice(hitStay) {
+    console.log("pressed")
+    if (hitStay == 'hit') {
+        anotherCard()
+    } if (hitStay == 'stay'){
+        endTurn()
+    }
+}
+
+function anotherCard() {
+    console.log("deal player another card")
+}
+
+function endTurn() {
+    console.log('player holds - dealer go')
+}
+
+function contDeal() { //to continue dealing after game/hand has already started
+
 }
 
