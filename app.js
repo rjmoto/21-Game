@@ -11,6 +11,7 @@ let pWeight = document.getElementById('pWeight') //display total of player's han
 let dWeight = document.getElementById('dWeight') //display total of dealer's hand
 let wallet = 100
 let message = document.getElementById("message")
+let turnIsOver = false
 
 
     for (s = 0; s < suits.length; s++) //loop puts together suits, values, color, card suit symbols
@@ -123,7 +124,10 @@ function anotherCard() {
     cardCount++
     let resultWeight = checkWeight(playerCards)
     pWeight.innerHTML = resultWeight
-
+    if (resultWeight > 21) {
+        message.innerHTML = "BUST!  You went over 21"
+        endTurn()
+    }
 }
 
 function checkWeight(arr) { //checks for aces, determines their weight
@@ -142,10 +146,29 @@ function checkWeight(arr) { //checks for aces, determines their weight
     return resultWeight
 }
 
+
+function endTurn() {
+    console.log('player holds - dealer go')
+    turnIsOver = true
+    document.getElementById('hide').style.display = 'none'
+    document.getElementById('playerChoices').style.display = 'none'
+    document.getElementById('dealButton').style.display = 'block'
+    document.getElementById('bet').disabled = false
+    message.innerHTML = "Game Over"
+
+    let dealerTotal = checkWeight(dealerCards)
+    dWeight.innerHTML = dealerTotal
+
+    while (dealerTotal < 17) {
+        dealerCards.push(deck[cardCount])
+        dealerHand.innerHTML += cardDisplay(cardCount, (dealerCards.length -1))
+        cardCount++
+        dealerTotal = checkWeight(dealerCards)
+    }
+}
+
 //continue dealing after game start
 //win/lose/push
-//Aces
-
 
 
 function dealACard() {
@@ -157,11 +180,6 @@ function dealACard() {
 }
 
 
-
-
-function endTurn() {
-    console.log('player holds - dealer go')
-}
 
 function contDeal() { //to continue dealing after game/hand has already started
 
