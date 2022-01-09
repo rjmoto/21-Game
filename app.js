@@ -40,6 +40,27 @@ function dealNew() { //to initally deal 2 cards each
     dealerCards = []
     playerHand.innerHTML = ''
     dealerHand.innerHTML = ''
+    // for(d = 0; d < 2; d++) {
+    //     dealerCards.push(deck[cardCount])
+    //     dealerHand.innerHTML += cardDisplay(cardCount, d)
+    //     if(d == 0) {
+    //         dealerHand.innerHTML += '<div id="hide" style="left: 100px;"></div>'
+    //     }
+    //     cardCount++
+    //     playerCards.push(deck[cardCount])
+    //     playerHand.innerHTML += cardDisplay(cardCount, d)
+    //     cardCount++
+    // }
+   dealACard()
+    console.log("pressed")
+}
+
+function dealACard() {
+    // // let randomNum = Math.floor((Math.random()*52)+1) //for selecting random card
+    // playerHand.innerHTML += "<span style='color:" + deck[cardCount].suitColor + "'>&" + deck[cardCount].symbol + ";" + deck[cardCount].weight + "</span>" //test to see random card, showing colored symbol and weight, occassionally get an error, probably because of deck[]random mashups? Not sure yet
+
+    // dealerHand.innerHTML += "<span style='color:" + deck[cardCount].suitColor + "'>&" + deck[cardCount].symbol + ";" + deck[cardCount].weight + "</span>"
+
     for(d = 0; d < 2; d++) {
         dealerCards.push(deck[cardCount])
         dealerHand.innerHTML += cardDisplay(cardCount, d)
@@ -51,14 +72,7 @@ function dealNew() { //to initally deal 2 cards each
         playerHand.innerHTML += cardDisplay(cardCount, d)
         cardCount++
     }
-    console.log("pressed")
-}
 
-function dealACard() {
-    // let randomNum = Math.floor((Math.random()*52)+1) //for selecting random card
-    playerHand.innerHTML += "<span style='color:" + deck[cardCount].suitColor + "'>&" + deck[cardCount].symbol + ";" + deck[cardCount].weight + "</span>" //test to see random card, showing colored symbol and weight, occassionally get an error, probably because of deck[]random mashups? Not sure yet
-
-    dealerHand.innerHTML += "<span style='color:" + deck[cardCount].suitColor + "'>&" + deck[cardCount].symbol + ";" + deck[cardCount].weight + "</span>"
 }
 
 
