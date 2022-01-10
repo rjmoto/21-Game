@@ -11,16 +11,17 @@
 <body>
     <header>
         <h1>My Blackjack Game</h1>
-        <h3>Try to get 21 or beat the dealer's score without going over</h3>
+        <h2>Try to get 21 or beat the dealer's score without going over</h2>
+        <h3>Press start to begin the game, press deal to play another round</h3>
     </header>
 
     <div id="start">
-        <button id="startbtn" type="button" onclick="start()" class="btn">Press To Start Game</button>
+        <button id="startbtn" type="button" onclick="start()" class="btn">START</button>
     </div>
 
     <div></div>
 
-    <div id="message">DISPLAY MESSAGES HERE</div>
+    <div id="message"></div>
 
 
     <div id='cardArea'>
@@ -40,8 +41,10 @@
 
     <!-- <div id='cardArea'> -->
     
+    <button id='dealButton' type='button' onclick="dealNew()" class="btn">Deal</button>
+        
             <div id="playerChoices">
-                <button id='dealButton' type='button' onclick="dealNew()" class="btn">Deal</button>
+                <!-- <button id='dealButton' type='button' onclick="dealNew()" class="btn">Deal</button> -->
 
                 <button id='hitButton' type='button' onclick='choice("hit")' class="btn">HIT</button>
 

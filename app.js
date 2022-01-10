@@ -10,7 +10,7 @@ let dealerHand = document.getElementById('dealerHand')
 let pWeight = document.getElementById('pWeight') //display total of player's hand
 let dWeight = document.getElementById('dWeight') //display total of dealer's hand
 let wallet = 100
-let moneyValue = document.getElementById('money')
+// let moneyValue = document.getElementById('money')
 let message = document.getElementById("message")
 let turnIsOver = false
 
@@ -72,26 +72,34 @@ function dealNew() { //to initally deal 2 cards each
 }
 
 function dealACard() {
-    // // let randomNum = Math.floor((Math.random()*52)+1) //for selecting random card
-    // playerHand.innerHTML += "<span style='color:" + deck[cardCount].suitColor + "'>&" + deck[cardCount].symbol + ";" + deck[cardCount].weight + "</span>" //test to see random card, showing colored symbol and weight, occassionally get an error, probably because of deck[]random mashups? Not sure yet
-
-    // dealerHand.innerHTML += "<span style='color:" + deck[cardCount].suitColor + "'>&" + deck[cardCount].symbol + ";" + deck[cardCount].weight + "</span>"
-
     for(d = 0; d < 2; d++) {
         dealerCards.push(deck[cardCount])
         dealerHand.innerHTML += cardDisplay(cardCount, d)
         if(d == 0) {
             dealerHand.innerHTML += '<div id="hide" style="left: 100px;"></div>'
         }
-        cardCount++
+        newShuffle()
         playerCards.push(deck[cardCount])
         playerHand.innerHTML += cardDisplay(cardCount, d)
-        cardCount++
+        newShuffle()
     }
-    pWeight.innerHTML = checkWeight(playerCards) //see player total
-    
+    let playerTotal = checkWeight(playerCards) //see player total
+    if (playerTotal == 21 && playerCards.length == 2) {
+        endTurn()
+    }
+    pWeight.innerHTML = playerTotal
+    console.log("dealACard activated")
 }
 
+function newShuffle() {
+    cardCount++
+    if (cardCount > 40) {
+        shuffle(deck)
+        cardCount = 0
+        message.innerHTML = "The Dealer Has Shuffled a New Deck"
+        console.log("newShuffle activated")
+    }
+}
 
 function shuffle(arr) { //randomly mixes up cards into different indices
     for(i = arr.length -1; i > 0; i--) { //loops through array back to front
@@ -123,13 +131,59 @@ function anotherCard() {
     playerCards.push(deck[cardCount])
     console.log(cardCount)
     playerHand.innerHTML += cardDisplay(cardCount, (playerCards.length - 1))
-    cardCount++
+    newShuffle()
     let resultWeight = checkWeight(playerCards)
     pWeight.innerHTML = resultWeight
     if (resultWeight > 21) {
-        message.innerHTML = "BUST!  You went over 21"
+        message.innerHTML = "BUST!  You went over 21 -"
         endTurn()
     }
+}
+
+
+function endTurn() { //player
+    console.log('player holds - dealer go')
+    turnIsOver = true
+    document.getElementById('hide').style.display = 'none' //control availibility of buttons
+    document.getElementById('playerChoices').style.display = 'none'
+    document.getElementById('dealButton').style.display = 'block'
+    document.getElementById('bet').disabled = false
+    // message.innerHTML = "The Round is Over. "
+    let bjPayout = 1
+    let dealerTotal = checkWeight(dealerCards)
+    dWeight.innerHTML = dealerTotal
+
+    while (dealerTotal < 17) { //dealer hits to 17
+        dealerCards.push(deck[cardCount])
+        dealerHand.innerHTML += cardDisplay(cardCount, (dealerCards.length -1))
+        newShuffle()
+        dealerTotal = checkWeight(dealerCards)
+        dWeight.innerHTML = dealerTotal
+    }
+    //win/lose logic
+    let playerTotal = checkWeight(playerCards) 
+    if (playerTotal == 21 && playerCards.length == 2) { //checking blackjack
+        message.innerHTML = "BLACKJACK! "
+        bjPayout = 1.5
+    }
+    let betValue = parseInt(document.getElementById('bet').value) * bjPayout
+
+    if ((playerTotal <= 21 && dealerTotal < playerTotal) || (dealerTotal > 21 && playerTotal <= 21)) {
+        message.innerHTML += " You Win!"
+        wallet = wallet + (betValue * 2)
+        // wallet += wallet + betAmount
+    } else if (playerTotal > 21) {
+        message.innerHTML += " Dealer Wins"
+    } else if (playerTotal == dealerTotal) {
+        message.innerHTML += " PUSH"
+        wallet = wallet + betValue
+    } else {
+        message.innerHTML += " Dealer Wins"
+    }
+    pWeight.innerHTML = playerTotal
+    // moneyValue.innerHTML = wallet
+    document.getElementById('money').innerHTML = wallet
+
 }
 
 function checkWeight(arr) { //checks for aces, determines their weight
@@ -148,70 +202,3 @@ function checkWeight(arr) { //checks for aces, determines their weight
     return resultWeight
 }
 
-
-function endTurn() { //player
-    console.log('player holds - dealer go')
-    turnIsOver = true
-    document.getElementById('hide').style.display = 'none' //control availibility of buttons
-    document.getElementById('playerChoices').style.display = 'none'
-    document.getElementById('dealButton').style.display = 'block'
-    document.getElementById('bet').disabled = false
-    message.innerHTML = "Game Over. "
-    let bjPayout = 1
-    let dealerTotal = checkWeight(dealerCards)
-    dWeight.innerHTML = dealerTotal
-
-    while (dealerTotal < 17) { //dealer hits to 17
-        dealerCards.push(deck[cardCount])
-        dealerHand.innerHTML += cardDisplay(cardCount, (dealerCards.length -1))
-        cardCount++
-        dealerTotal = checkWeight(dealerCards)
-        dWeight.innerHTML = dealerTotal
-    }
-    //win/lose logic
-    let playerTotal = checkWeight(playerCards) 
-    if (playerTotal == 21 && playerCards.length == 2) { //checking blackjack
-        message.innerHTML = "BLACKJACK! "
-        bjPayout = 1.5
-    }
-    let betValue = parseInt(document.getElementById('bet').value) * bjPayout
-
-    if ((playerTotal <= 21 && dealerTotal < playerTotal) || (dealerTotal > 21 && playerTotal <= 21)) {
-        message.innerHTML += " You Won!"
-        wallet = wallet + (betValue * 2)
-        // wallet += wallet + betAmount
-    } else if (playerTotal > 21) {
-        message.innerHTML += " Dealer Wins"
-    } else if (playerTotal == dealerTotal) {
-        message.innerHTML += " PUSH"
-        wallet = wallet + betValue
-    } else {
-        message.innerHTML += " Dealer Wins"
-    }
-    pWeight.innerHTML = playerTotal
-    moneyValue.innerHTML = wallet
-}
-
-//continue dealing after game start
-//win/lose/push
-
-
-
-// function contDeal() { //to continue dealing after game/hand has already started
-
-// }
-
-
-
-//continue dealing after game start
-//win/lose/push
-//bets
-//wallet
-//result message to player
-//show player & dealer's scores 
-
-// let betAmount = document.getElementById('bet').value //pickup bet amount for new hand
-// wallet = wallet - betAmount //adjust wallet by bet amount
-// document.getElementById('money').innerHTML = wallet
-// document.getElementById('playerChoices').style.display = 'block' //show play option buttons
-// document.getElementById('bet').disabled = true //disable betting after cards dealt
