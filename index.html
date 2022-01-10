@@ -10,56 +10,32 @@
 </head>
 <body>
     <header>
-        <h1>My Blackjack Game</h1>
-        <h2>Try to get 21 or beat the dealer's score without going over</h2>
-        <h3>Press start to begin the game, press deal to play another round</h3>
+        <h1>21 GAME</h1>
+        <h3>Try to get 21 or beat the dealer's score without going over</h3>
     </header>
-
     <div id="start">
         <button id="startbtn" type="button" onclick="start()" class="btn">START</button>
     </div>
-
-    <div></div>
-
     <div id="message"></div>
-
-
     <div id='cardArea'>
         Dealer's Hand = <span id="dWeight"></span>
-        <div id='dealerHand'>
-            <!-- <div class='card'></div> -->
-        </div>
+        <div id='dealerHand'></div>
         Player's Hand = <span id="pWeight"></span>
-        <div id='playerHand'>
-            <!-- <div class='card'></div> -->
-        </div>
+        <div id='playerHand'></div>
     </div>
-
-    <!-- <div class='card'>test</div> -->
-    <!-- <div id='cardArea'></div>    -->
-    <!-- <div id="message">Display messages here</div> -->
-
-    <!-- <div id='cardArea'> -->
-    
-    <button id='dealButton' type='button' onclick="dealNew()" class="btn">Deal</button>
-        
-            <div id="playerChoices">
-                <!-- <button id='dealButton' type='button' onclick="dealNew()" class="btn">Deal</button> -->
-
-                <button id='hitButton' type='button' onclick='choice("hit")' class="btn">HIT</button>
-
-                <button id='stayButton' type='button' onclick='choice("stay")' class="btn">STAY</button>
-            </div>
-        <!-- </div> -->
-        <!-- <br> -->
-
-        <div>
-            Bet Amount: $<input type="number" id="bet" value="10" min="10" max="100"></input>
+        <div class="bet">
+            Bet Amount: <span id="cash">$</span> <input type="number" id="bet" value="10" min="10" max="100"></input>
         </div>
-
-        <div class="wallet">WALLET: $<span id="money">100</span>
+        <br>
+        <div class="wallet">WALLET: <span id="cash">$</span><span id="money">100</span>
         </div>
-    
+    <div id="buttons">
+        <div id="playerChoices">
+            <button id='hitButton' type='button' onclick='choice("hit")' class="btn">HIT</button>
+            <button id='stayButton' type='button' onclick='choice("stay")' class="btn">STAY</button>
+        </div>
+        <button id='dealButton' type='button' onclick="dealNew()" class="btn">Deal</button>
+    </div>
 </body>
 </html>
 
